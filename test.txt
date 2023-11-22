@@ -1,0 +1,23 @@
+I. Major project
+This year, I had the privilege of leading the P2G demise project, guiding the team in developing and implementing a new common solution to replace the previous P2G system. We worked closely with the POD team to ensure smooth adoption of this new solution. Key project include:
+
+DaaSC Post Logon: Optimized the client login process for DaaSC PIB, significantly reducing the waiting time by 55% (6 seconds).
+DaaSC Note: Change the data source from Teamsite to AEM.
+ETNET Migration (DaaSC & Desktop): Migrated stock information retrieval to the DP platform.
+Document Up Migration (DaaSC & Desktop): Migrated document upload common method to DP platform.
+SMS-OTP Migration (DaaSC & Desktop): Enhanced the process for sending and verifying OTP, redesigning the verification process on the DP platform.
+Investment Notification Migration: Migrated to DP platfrom, service shifting from eAlert to MDC and use high risk way.
+PIB Logoff Migration: Migrated PIB logoff flow to the DP platform.
+II. Skills Enhancement and Professional Development
+In my daily work, I faced numerous challenges, especially in resolving technical issues that the POD team struggled with. Through in-depth communication with various parties, I enhanced my ability to identify and resolve problems. Additionally, I self-studied and obtained the Senior Certificate of System Analyst from the Software Qualification Exam, and delved into chatGPT, major domestic open-source LLMs, AI multimodal, langchain, Stable Diffusion, etc., successfully developing and deploying personal applications.
+
+III. Challenges and Learning
+In the DaaSC Post Logon project, I innovatively used packet capturing techniques to successfully organize all API calls and their sequence during the login process. Faced with the challenge of optimizing login time, I proposed an asynchronous processing solution, which proved effective in the UAT environment, achieving significant performance improvements. This process not only honed my technical skills but also taught me the importance of thinking from different perspectives.
+
+IV. Goals and Self-Improvement
+Moving forward, I am committed to completing the P2G Demise project, ensuring the P2G server is shut down as scheduled next March, saving costs for the company. Additionally, I plan to continue my research in the AI field and apply my learnings to the company's daily operations and projects.
+
+V. Feedback and Support Request
+I hope to undertake more team management and AI-related tasks in the future to further broaden my professional horizons and skills.
+
+I am grateful for the support and guidance from my leaders and team over the past year, which have been crucial to my professional growth.
