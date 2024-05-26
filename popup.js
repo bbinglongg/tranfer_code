@@ -1,24 +1,36 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // 监听插件图标的点击事件
-  chrome.browserAction.onClicked.addListener(function(tab) {
-    // 创建悬浮框的代码
-    const floatingBox = document.createElement('div');
-    floatingBox.innerHTML = '<h1>URL Logger</h1><button id="logUrl">Log Current URL</button>';
+document.addEventListener('DOMContentLoaded', function () {
+  var options = document.getElementById('options');
+  var loading = document.getElementById('loading');
+  var error = document.getElementById('error');
+  var closeErrorBtn = document.getElementById('closeError');
 
-    // 设置悬浮框的样式
-    floatingBox.style.position = 'fixed';
-    floatingBox.style.top = '10px'; // 距离页面顶部 10px
-    floatingBox.style.right = '10px'; // 距离页面右侧 10px
-    floatingBox.style.backgroundColor = 'rgba(255, 255, 255, 0.7)'; // 半透明白色背景
-    floatingBox.style.padding = '10px';
-    floatingBox.style.zIndex = '9999'; // 确保浮动框在最顶层
+  options.addEventListener('change', function () {
+    if (options.value === 'AIT') {
+      loading.style.display = 'block';
+      error.style.display = 'none';
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        var pageURL = tabs[0].url;
+        fetch('http://127.0.0.1:5041/v1/page_id_list', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ page_url: pageURL })
+        })
+          .then(response => response.json())
+          .then(data => {
+            loading.style.display = 'none';
+            chrome.tabs.update(tabs[0].id, { url: 'http://127.0.0.1:3000?page_id_list=' + JSON.stringify(data) });
+          })
+          .catch(error => {
+            loading.style.display = 'none';
+            error.style.display = 'block';
+          });
+      });
+    }
+  });
 
-    // 将悬浮框添加到页面中
-    document.body.appendChild(floatingBox);
-
-    // 绑定按钮点击事件，获取当前页面 URL 并输出到控制台
-    document.getElementById('logUrl').addEventListener('click', function() {
-      console.log('Current URL:', tab.url);
-    });
+  closeErrorBtn.addEventListener('click', function () {
+    error.style.display = 'none';
   });
 });
