@@ -18,7 +18,7 @@ document.getElementById('logUrl').addEventListener('click', function() {
   console.log('Current URL:', window.location.href);
 });
 
-// 监听页面卸载事件，在页面卸载时移除悬浮框
-window.addEventListener('beforeunload', function() {
+// 监听页面重新加载事件，在重新加载时移除悬浮框
+window.addEventListener('DOMContentLoaded', function() {
   floatingBox.remove();
 });
