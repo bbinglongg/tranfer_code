@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   btn.addEventListener('click', function () {
     btn.disabled = true;
     btn.textContent = '';
+    btn.style.display = 'none';
     loading.style.display = 'inline-block';
 
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
           loading.style.display = 'none';
           btn.textContent = '操作错误';
+          btn.style.display = 'inline-block';
           setTimeout(function () {
             closePopup(0);
           }, 3000); // Close popup after 3 seconds
