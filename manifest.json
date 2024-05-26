@@ -5,7 +5,8 @@
   "description": "A Chrome extension to log the current webpage URL",
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "http://hkl20143361:5001/v1/page_id_list"
   ],
   "background": {
     "service_worker": "background.js"
