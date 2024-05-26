@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
           return response.json();
         })
         .then(data => {
-          chrome.tabs.update(tabs[0].id, { url: 'http://127.0.0.1:3000?page_id_list=' + JSON.stringify(data) });
+          var newURL = 'http://127.0.0.1:3000?page_id_list=' + JSON.stringify(data);
+          chrome.tabs.create({ url: newURL });
           closePopup(1000); // Close popup after 1 second
         })
         .catch(error => {
