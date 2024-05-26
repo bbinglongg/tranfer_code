@@ -1,24 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "URL Logger",
+  "name": "My Chrome Extension",
   "version": "1.0",
-  "description": "A Chrome extension to log the current webpage URL",
-  "permissions": [
-    "activeTab",
-    "scripting",
-    "http://hkl20143361:5001/v1/page_id_list"
-  ],
+  "description": "Description of my Chrome Extension",
+  "permissions": ["activeTab"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "browser_action.html"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "run_at": "document_idle"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
     }
-  ]
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
 }
