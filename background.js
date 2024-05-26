@@ -1,6 +1,4 @@
-// background.js
-
-chrome.browserAction.onClicked.addListener(function (tab) {
+chrome.action.onClicked.addListener(function (tab) {
   var pageURL = tab.url;
   fetch('http://127.0.0.1:5041/v1/page_id_list', {
     method: 'POST',
