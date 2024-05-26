@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "My Chrome Extension",
+  "name": "AIT",
   "version": "1.0",
-  "description": "Description of my Chrome Extension",
+  "description": "AI Tools",
   "permissions": ["activeTab"],
   "background": {
     "service_worker": "background.js"
