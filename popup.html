@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>URL Logger</title>
+  <title>Popup</title>
   <script src="popup.js"></script>
 </head>
 <body>
+  <select id="options">
+    <option value="AIT">AIT</option>
+  </select>
+  <div id="loading" style="display: none;">Loading...</div>
+  <div id="error" style="display: none;">操作错误 <button id="closeError">X</button></div>
 </body>
 </html>
