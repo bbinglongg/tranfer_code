@@ -5,24 +5,21 @@ intraday_data = pd.read_csv('Simulation_INTRADAY_DATA_HSI.csv')
 daily_data = pd.read_csv('daily.csv')
 dummay_data = pd.read_csv('Dummay_data.csv')
 
-# 提取每日涨跌符号
+# 提取前3周数据的涨跌符号 
 def extract_daily_trend(data):
-    data['datetime'] = pd.to_datetime(data['date'] + ' ' + data['time'])
-    data.set_index('datetime', inplace=True)
-    data['change'] = data['current'].diff()
-    data['trend'] = (data['change'] > 0).astype(int)
+    data['date'] = pd.to_datetime(data['date'])
+    data.set_index('date', inplace=True)
+    data['trend'] = (data['current'] > data['current'].shift(1)).astype(int)
     daily_trend = data.resample('D').last()['trend']
     return daily_trend.dropna()
 
 dummy_daily_trend = extract_daily_trend(dummay_data)
 
-# 匹配时间段
-# 提取历史数据的每日涨跌符号
+# 提取历史数据的涨跌符号 
 def extract_historical_trend(data):
     data['date'] = pd.to_datetime(data['日期'])
     data.set_index('date', inplace=True)
-    data['change'] = data['收市'].diff()
-    data['trend'] = (data['change'] > 0).astype(int)
+    data['trend'] = (data['最高'] > data['最高'].shift(1)).astype(int)
     return data['trend'].dropna()
 
 historical_trend = extract_historical_trend(daily_data)
@@ -63,4 +60,3 @@ def apply_masking_coefficient(value, coefficient):
     return value * coefficient
 
 adjusted_max_value = apply_masking_coefficient(predicted_max_value, masking_coefficient)
-
