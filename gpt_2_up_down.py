@@ -7,8 +7,8 @@ dummay_data = pd.read_csv('Dummay_data.csv')
 
 # 提取每日涨跌符号
 def extract_daily_trend(data):
-    data['date'] = pd.to_datetime(data['date'])
-    data.set_index('date', inplace=True)
+    data['datetime'] = pd.to_datetime(data['date'] + ' ' + data['time'])
+    data.set_index('datetime', inplace=True)
     data['change'] = data['current'].diff()
     data['trend'] = (data['change'] > 0).astype(int)
     daily_trend = data.resample('D').last()['trend']
@@ -16,38 +16,42 @@ def extract_daily_trend(data):
 
 dummy_daily_trend = extract_daily_trend(dummay_data)
 
-# 匹配时间段 
-def find_matching_period(daily_trend, historical_data):
-    historical_data['date'] = pd.to_datetime(historical_data['日期'])
-    historical_data.set_index('date', inplace=True)
-    historical_data['change'] = historical_data['收市'].diff()
-    historical_data['trend'] = (historical_data['change'] > 0).astype(int)
+# 匹配时间段
+# 提取历史数据的每日涨跌符号
+def extract_historical_trend(data):
+    data['date'] = pd.to_datetime(data['日期'])
+    data.set_index('date', inplace=True)
+    data['change'] = data['收市'].diff()
+    data['trend'] = (data['change'] > 0).astype(int)
+    return data['trend'].dropna()
 
-    for start in range(len(historical_data) - len(daily_trend) + 1):
+historical_trend = extract_historical_trend(daily_data)
+
+# 匹配时间段 
+def find_matching_period(daily_trend, historical_trend):
+    for start in range(len(historical_trend) - len(daily_trend) + 1):
         match = True
         for i in range(len(daily_trend)):
-            if historical_data['trend'].iloc[start + i] != daily_trend.iloc[i]:
+            if historical_trend.iloc[start + i] != daily_trend.iloc[i]:
                 match = False
                 break
         if match:
-            return historical_data.index[start]
-
+            return historical_trend.index[start]
     return None
 
-matching_start_date = find_matching_period(dummy_daily_trend, daily_data)
-
+matching_start_date = find_matching_period(dummy_daily_trend, historical_trend)
 
 # 预测最后一周的最高值 
 def get_predicted_max_value(matching_start_date, historical_data):
-    matching_period = historical_data.loc[matching_start_date:matching_start_date + pd.DateOffset(weeks=3)]
-    next_week = historical_data.loc[matching_start_date + pd.DateOffset(weeks=3):matching_start_date + pd.DateOffset(weeks=4)]
+    next_week_start = matching_start_date + pd.DateOffset(weeks=3)
+    next_week_end = next_week_start + pd.DateOffset(weeks=1)
+    next_week = historical_data.loc[next_week_start:next_week_end]
     return next_week['最高'].max()
 
 predicted_max_value = get_predicted_max_value(matching_start_date, daily_data)
 
 # 找出masking的规律 
 def find_masking_formula(dummay_data, intraday_data):
-    # 计算前3个星期的masking系数
     dummy_max = dummay_data['current'].max()
     historical_max = intraday_data['current'].max()
     masking_coefficient = dummy_max / historical_max
