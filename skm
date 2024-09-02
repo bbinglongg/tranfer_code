@@ -1,0 +1,22 @@
+import subprocess
+import time
+
+# URL to open
+url = "https://"
+
+# Command to open Chrome in incognito mode and disable cache
+chrome_command = ["C:\Program Files\Google\Chrome\Application\chrome.exe", "--new-window", "--incognito", "--disable-application-cache", url]
+
+# Function to open the URL in a new window every second
+def open_url_in_new_window():
+    while True:
+        try:
+            # Use subprocess to call the command
+            subprocess.Popen(chrome_command)
+        except Exception as e:
+            print(f"Error opening the page: {e}")
+        # Wait for 1 second before opening the next window
+        time.sleep(5)
+
+if __name__ == "__main__":
+    open_url_in_new_window()
