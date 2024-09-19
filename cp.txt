@@ -1,0 +1,14 @@
+以下是具有一定深度，并能够真正考验 GitHub Copilot（或任何 AI 代码助手）的实力的 10 个问题：
+
+1. **Can you generate a Python implementation of a Transformer model for text classification using PyTorch?**
+2. **Write an algorithm in C++ to solve the traveling salesman problem using dynamic programming with memoization.**
+3. **Implement a distributed microservice architecture with gRPC in Go, including client-server communication and load balancing.**
+4. **How do I implement an event-driven architecture in Java using Kafka for asynchronous message passing between microservices?**
+5. **Generate code to fine-tune a pre-trained BERT model on a custom dataset using Hugging Face Transformers.**
+6. **Create an efficient solution in Rust to solve the n-queens problem using backtracking.**
+7. **Write a TypeScript implementation of a trie (prefix tree) for auto-completion, including insert and search functionalities.**
+8. **Implement a scalable recommendation system in Python using collaborative filtering and matrix factorization.**
+9. **How can I set up a CI/CD pipeline using GitHub Actions for a Kubernetes-based application, ensuring automated deployment and rollback strategies?**
+10. **Design a database schema for a multi-tenant SaaS application, considering data isolation, shared resources, and scalability in PostgreSQL.**
+
+这些问题涉及高级算法、分布式系统、自然语言处理、架构设计、数据库设计等领域，需要 AI 展现出对复杂场景的理解与实现能力。
